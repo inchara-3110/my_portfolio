@@ -4,20 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SEO: edit the domain (https://www.example.com) everywhere once you have your real URL -->
+  <!-- SEO basics -->
   <title>K Inchara | Cyber Security Analyst &amp; SOC Analyst Portfolio</title>
   <meta name="description" content="Portfolio of K Inchara, a junior cyber security enthusiast and aspiring SOC analyst focused on threat detection, log analysis and incident response.">
   <meta name="author" content="K Inchara">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#050A18">
-  <link rel="canonical" href="https://www.example.com/">
+  <link rel="canonical" href="https://incharaa.vercel.app/">
 
+  <!-- GOOGLE VERIFICATION: in Step 6, paste the tag Google gives you on the next line -->
+
+  <!-- Link previews (WhatsApp, LinkedIn, etc.) -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="K Inchara Portfolio">
   <meta property="og:title" content="K Inchara | Cyber Security Analyst">
   <meta property="og:description" content="SOC Analyst | Junior Cyber Enthusiast. Projects, skills and certifications.">
-  <meta property="og:url" content="https://www.example.com/">
-  <meta property="og:image" content="https://www.example.com/assets/images/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://incharaa.vercel.app/">
+  <meta property="og:image" content="https://incharaa.vercel.app/assets/images/profile.jpeg">
+  <meta property="og:image:alt" content="Portrait of K Inchara, cyber security analyst">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="K Inchara | Cyber Security Analyst">
+  <meta name="twitter:description" content="SOC Analyst | Junior Cyber Enthusiast. Projects, skills and certifications.">
+  <meta name="twitter:image" content="https://incharaa.vercel.app/assets/images/profile.jpeg">
 
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,18 +33,32 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=5">
 
+  <!-- Structured data: tells Google who you are -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "K Inchara",
-    "jobTitle": "Cyber Security Analyst",
-    "description": "SOC Analyst and junior cyber security enthusiast.",
-    "url": "https://www.example.com/",
-    "image": "https://www.example.com/assets/images/profile.jpg",
-    "sameAs": [
-      "https://github.com/your-username",
-      "https://www.linkedin.com/in/your-username"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://incharaa.vercel.app/#website",
+        "url": "https://incharaa.vercel.app/",
+        "name": "K Inchara Portfolio",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://incharaa.vercel.app/#person",
+        "name": "K Inchara",
+        "jobTitle": "Cyber Security Analyst",
+        "description": "SOC Analyst and junior cyber security enthusiast focused on threat detection, log analysis and incident response.",
+        "url": "https://incharaa.vercel.app/",
+        "image": "https://incharaa.vercel.app/assets/images/profile.jpeg",
+        "knowsAbout": ["Cyber security", "SOC analysis", "Threat detection", "Log analysis", "Incident response", "Phishing analysis"],
+        "sameAs": [
+          "https://github.com/inchara-3110",
+          "https://www.linkedin.com/in/incharak/"
+        ]
+      }
     ]
   }
   </script>

@@ -19,7 +19,7 @@ server/server.js     BACK END (Express: compression, caching, security headers)
 
 ## Edit checklist
 1. Photo: add assets/images/profile.jpg and change the img src in index.html.
-2. Replace https://www.example.com with your real domain (index.html, robots.txt, sitemap.xml).
+2. Replace https://incharaa.vercel.app with your real domain (index.html, robots.txt, sitemap.xml).
 3. Replace your-username links and the email address.
 4. Update skills, tools, projects and certifications to match what is true for you.
 5. Add a 1200x630 assets/images/og-image.jpg for link previews.
