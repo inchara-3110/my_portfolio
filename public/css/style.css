@@ -237,36 +237,35 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; }
 .wheel__chips.has-active .wheel__chip:not(.is-active) { opacity: .7; }
 
 /* ---------- project details pop-up (dark shadowed background) ---------- */
+
 .project-dialog {
-  padding: 0; border: 0; background: transparent; color: var(--black);
-  width: min(580px, calc(100% - 32px)); max-width: none; margin: auto; overflow: visible;
+  padding: 24px;
+  border: 0;
+  background: transparent;
+  color: var(--black);
+  width: min(1100px, calc(100% - 32px));
+  max-width: none;
+  margin: auto;
+  overflow: visible;
+
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 580px);
+  align-items: center;
+  gap: 28px;
 }
-.project-dialog::backdrop { background: rgba(2, 5, 14, .78); backdrop-filter: blur(5px); }
-.project-dialog__box {
-  position: relative; background: var(--cream); border-radius: var(--radius-lg);
-  border-left: 10px solid var(--c, var(--cream-3));
-  padding: 34px 34px 30px; text-align: left;
-  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .35);
-  max-height: calc(100vh - 48px); overflow: auto;
-  animation: pop .35s var(--ease);
+
+.project-dialog[open] {
+  display: grid;
 }
-.project-dialog__box h3 { font-size: 1.5rem; font-weight: 700; color: var(--black); margin-bottom: 14px; padding-right: 48px; }
-.project-dialog__body { display: flex; flex-direction: column; gap: 18px; }
-.project__desc { color: var(--card-dim); font-size: .98rem; line-height: 1.6; }
-.project__meta { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%; }
-.project__meta h4 { font-size: .95rem; font-weight: 700; color: var(--black); }
-.tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.tags li { border: 1px solid var(--cream-3); background: var(--cream-2); border-radius: 999px; padding: 4px 12px; font-size: .85rem; color: var(--black); }
-.details { display: flex; flex-direction: column; gap: 2px; font-size: .92rem; color: var(--card-dim); }
-.details strong { color: var(--black); }
-.link { color: var(--bg-2); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; font-size: .95rem; }
-.icon-close {
-  position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; border: 0;
-  background: var(--cream-2); color: var(--black); display: grid; place-items: center; cursor: pointer;
-  transition: transform .25s ease, background .25s ease;
+
+.project-dialog > .wheel__stage {
+  width: min(460px, 100%);
+  margin: 0 auto;
 }
-.icon-close:hover { transform: scale(1.1); background: var(--cream-3); }
-@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+.project-dialog .project-dialog__box {
+  width: 100%;
+  min-width: 0;
+}
 
 /* ---------- certifications: rectangle boxes ---------- */
 .cert-grid {
@@ -374,4 +373,296 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .loader { display: none !important; }
+}
+
+
+
+
+/* Outer circle: clean cream/white outline */
+.cursor-ring {
+  border: 1.5px solid #F3EBD8 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Keep the same appearance when hovering or clicking */
+.cursor-hover .cursor-ring,
+.cursor-ring:hover,
+.cursor-ring:active {
+  border: 1.5px solid #F3EBD8 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Centre dot: solid cream, without a black border */
+.cursor-dot {
+  background: #F3EBD8 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ---------- PROJECT RING: preserve original segment colours ---------- */
+
+.seg.is-active {
+  filter: none !important;
+}
+
+/* ==================================================
+   PROJECT LAYOUT FIX
+   Original rotating ring left, cream details card right
+   ================================================== */
+
+/* Arrange the ring and details side by side only when selected */
+#projectWheel.is-project-open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Rotating ring stays on the LEFT */
+#projectWheel.is-project-open > .wheel__stage {
+  grid-column: 1;
+  grid-row: 1;
+  width: min(460px, 100%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide details until a project is selected */
+#projectWheel > .project-dialog__box {
+  display: none;
+}
+
+/* Selected project details card on the RIGHT */
+#projectWheel.is-project-open > .project-dialog__box {
+  display: block;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  width: 100%;
+  min-width: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+
+  padding: 32px;
+  background: var(--cream);
+  color: var(--black);
+  border: 1px solid var(--cream-3);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glow);
+
+  animation: projectCardEnter .35s var(--ease) both;
+}
+
+/* Keep project names underneath the ring and card */
+#projectWheel.is-project-open > .wheel__chips {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Keep the card's text readable */
+#projectWheel .project-dialog__box h3,
+#projectWheel .project-dialog__box h4 {
+  color: var(--black);
+}
+
+#projectWheel .project-dialog__box p,
+#projectWheel .project-dialog__box li,
+#projectWheel .project-dialog__box a {
+  color: var(--black);
+}
+
+/* Close button inside the cream card */
+#projectWheel .project-dialog__box .icon-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+}
+
+/* Remove the white glow from the selected ring segment */
+.seg.is-active {
+  filter: none;
+}
+
+/* Gentle upward entrance for the details card */
+@keyframes projectCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile: stack ring, card and project names */
+@media (max-width: 760px) {
+  #projectWheel.is-project-open {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  #projectWheel.is-project-open > .wheel__stage {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(320px, 100%);
+  }
+
+  #projectWheel.is-project-open > .project-dialog__box {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: none;
+    padding: 28px 22px;
+  }
+
+  #projectWheel.is-project-open > .wheel__chips {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* ==========================================
+   PROJECT CARD — SMALL POLISHING FIXES
+   ========================================== */
+
+/* Compact cream card */
+.project-dialog__box {
+  padding: 26px 28px !important;
+  border-radius: 24px !important;
+  border: 1px solid var(--cream-3) !important;
+  box-shadow: 0 24px 48px -18px rgba(0, 0, 0, .65) !important;
+  text-align: center;
+}
+
+/* Highlight the project name */
+
+.project-dialog__box h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem) !important;
+  font-weight: 800 !important;
+  color: var(--black) !important;
+  letter-spacing: -.02em;
+  line-height: 1.4 !important;
+  margin: 0 0 14px !important;
+  padding-bottom: 7px;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: #C47D68;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+  overflow-wrap: anywhere;
+}
+
+.project-dialog__box p {
+  margin: 10px 0 !important;
+  line-height: 1.55 !important;
+  overflow-wrap: anywhere;
+}
+
+
+/* Cleaner spacing for project information */
+.project-dialog__box p {
+  margin: 5px 0;
+  line-height: 1.6;
+}
+
+/* Hide the Details heading, keeping its information */
+.project-dialog__box h4:last-of-type {
+  display: none !important;
+}
+
+/* Arrange tool lists horizontally as rounded chips */
+
+.project-dialog__box ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 18px !important;
+  padding: 0;
+  list-style: none;
+}
+
+.project-dialog__box ul li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--cream-3);
+  background: var(--cream-2);
+  color: var(--black);
+  font-size: .9rem;
+  line-height: 1.4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.project-dialog__box ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+}
+
+/* Smaller, softer close button */
+.project-dialog__box button {
+  border-radius: 9px;
+}
+
+.project-dialog__box button:hover {
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   CURSOR — KEEP THE SAME LOOK ON HOVER
+   ========================================== */
+
+/* Keep the circle outline stable */
+.cursor-ring {
+  background: transparent !important;
+  border-color: var(--cream) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .65) !important;
+}
+
+/* Hovering over cards must not fill the circle */
+.cursor-hover .cursor-ring,
+.cursor-ring:hover,
+.cursor-ring:active {
+  background: transparent !important;
+  border-color: var(--cream) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .65) !important;
+}
+
+/* Keep the centre dot round and visible */
+.cursor-dot {
+  border-radius: 50% !important;
+  background: var(--cream) !important;
+  border: 1px solid #141414 !important;
+  box-shadow: none !important;
+}
+
+.project-dialog__box h4 {
+  display: inline-block;
+  margin: 12px 0 5px !important;
+  padding: 5px 13px;
+  border-radius: 10px;
+  background: var(--cream-2);
+  color: var(--black) !important;
+  font-size: 1rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+}
+
+.project-dialog__box .icon-close {
+  display: none !important;
 }

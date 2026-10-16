@@ -52,6 +52,8 @@
     const ring = document.getElementById('wheelRing');
     const badges = document.getElementById('wheelBadges');
     const stage = wheel.querySelector('.wheel__stage');
+    const stageParent = stage.parentNode;
+    const stageNext = stage.nextSibling;
     const chipsWrap = wheel.querySelector('.wheel__chips');
     const items = Array.from(wheel.querySelectorAll('.wheel__item'));
     const chips = items.map((li) => li.querySelector('.wheel__chip'));
@@ -66,7 +68,14 @@
 
     const n = chips.length;
     if (n > 0) {
-      const palette = ['#E8707F', '#F2A65A', '#EBCB5B', '#86C47A', '#5B9BD5', '#B081C0'];
+      const palette = [
+  '#D8C3A5', // Sand
+  '#C77D67', // Terracotta
+  '#92969A', // Soft grey
+  '#6F91AD', // Muted blue
+  '#B6A58A', // Warm beige
+  '#526D82'  // Slate blue
+];
       const C = 200;          // centre of the ring
       const R = 140;          // middle radius of the ring
       const GAP = 3.2;        // gap between segments, in degrees
@@ -96,17 +105,28 @@
         cSub.textContent = 'Select one';
       };
 
-      const openProject = (i) => {
-        if (!dialog || typeof dialog.showModal !== 'function') return;
-        const more = items[i].querySelector('.wheel__more');
-        pdTitle.textContent = chips[i].textContent.trim();
-        pdBody.replaceChildren(...Array.from(more.cloneNode(true).childNodes));
-        dialogBox.style.setProperty('--c', colors[i]);
-        root.classList.add('modal-open');
-        highlight(i);
-        dialog.showModal();
-        dialog.dataset.from = String(i);
-      };
+   
+const openProject = (i) => {
+  if (!dialogBox || !pdTitle || !pdBody) return;
+
+  const more = items[i].querySelector('.wheel__more');
+  if (!more) return;
+
+  pdTitle.textContent = chips[i].textContent.trim();
+  pdBody.replaceChildren(
+    ...Array.from(more.cloneNode(true).childNodes)
+  );
+
+  dialogBox.style.setProperty('--c', colors[i]);
+
+  /* Show details beside the existing rotating ring */
+  wheel.classList.add('is-project-open');
+  highlight(i);
+
+  /* Keep the selected project visible */
+  dialogBox.scrollTop = 0;
+};
+
 
       chips.forEach((chip, i) => {
         const color = palette[Math.floor((i * palette.length) / n)];
@@ -142,16 +162,17 @@
         path.addEventListener('mouseleave', unhighlight);
       });
 
-      if (dialog && pdClose) {
-        pdClose.addEventListener('click', () => dialog.close());
-        dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-        dialog.addEventListener('close', () => {
-          root.classList.remove('modal-open');
-          unhighlight();
-          const from = Number(dialog.dataset.from);
-          if (chips[from]) chips[from].focus({ preventScroll: true });
-        });
-      }
+
+if (dialogBox && pdClose) {
+  /* Place the existing details card inside the project wheel */
+  wheel.insertBefore(dialogBox, chipsWrap);
+
+  pdClose.addEventListener('click', () => {
+    wheel.classList.remove('is-project-open');
+    unhighlight();
+  });
+}
+
 
       /* the ring keeps rotating all the time */
       let spin = 0;
