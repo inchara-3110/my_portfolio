@@ -12,8 +12,7 @@
   <meta name="theme-color" content="#050A18">
   <link rel="canonical" href="https://incharaa.vercel.app/">
 
-<meta name="google-site-verification" content="LGQrPcnGM2Fz002-LcTTdO1hPV-XFjCAUXofJhjRE9Y" />
-  <!-- GOOGLE VERIFICATION: in Step 6, paste the tag Google gives you on the next line -->
+  <!-- GOOGLE VERIFICATION: paste your google-site-verification line on the next line -->
 
   <!-- Link previews (WhatsApp, LinkedIn, etc.) -->
   <meta property="og:type" content="website">
@@ -32,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=7">
 
   <!-- Structured data: tells Google who you are -->
   <script type="application/ld+json">
@@ -115,7 +114,6 @@
     <!-- HERO -->
     <section class="hero container" id="top">
       <div class="hero__photo">
-        <!-- To use your own photo: save it as profile.jpg in assets/images, then change profile.svg to profile.jpg below -->
         <img src="assets/images/profile.jpeg" alt="Portrait of K Inchara, cyber security analyst" width="320" height="320">
       </div>
       <div class="hero__text">
@@ -183,21 +181,29 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- PROJECTS (rotating ring: click a project name for its details) -->
     <section class="section container" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Projects</h2>
+      <p class="section__lead">Select a project to see its details.</p>
 
-      <div class="slider" aria-roledescription="carousel" aria-label="Projects">
-        <button class="round-btn slider__arrow slider__arrow--prev" id="prevProject" type="button" aria-label="Previous project">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-        </button>
+      <div class="wheel" id="projectWheel">
+        <div class="wheel__stage">
+          <svg class="wheel__svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+            <g id="wheelRing"></g>
+            <g id="wheelBadges"></g>
+          </svg>
+          <div class="wheel__center" aria-hidden="true">
+            <span class="wheel__center-title" id="wheelTitle">Projects</span>
+            <span class="wheel__center-sub" id="wheelSub">Select one</span>
+          </div>
+        </div>
 
-        <div class="slider__track" id="projectTrack" tabindex="0">
+        <!-- To add a project: copy one whole <li> ... </li> block below and edit it. The ring adjusts by itself. -->
+        <ul class="wheel__chips" id="wheelChips">
 
-          <!-- Edit the text of each project so it matches your real work -->
-          <article class="project" aria-roledescription="slide" aria-label="1 of 3">
-            <div class="project__body">
-              <h3>Home SOC Lab</h3>
+          <li class="wheel__item">
+            <button class="wheel__chip" type="button" aria-haspopup="dialog">Home SOC Lab</button>
+            <div class="wheel__more" hidden>
               <p class="project__desc">A virtual lab where endpoint logs flow into a SIEM, with detection rules and written triage notes for each alert.</p>
               <div class="project__meta">
                 <h4>Tools used</h4>
@@ -206,17 +212,16 @@
               <div class="project__meta">
                 <h4>Details</h4>
                 <ul class="details">
-                  <li><strong>Status:</strong> In progress</li>
-                  <li><strong>Focus:</strong> Log analysis, detection rules, alert triage</li>
+                  <li><strong>Focus:</strong> Log analysis, detection rules and alert triage</li>
                 </ul>
-                <a class="link" href="https://github.com/your-username" target="_blank" rel="noopener">View on GitHub</a>
+                <a class="link" href="https://github.com/inchara-3110" target="_blank" rel="noopener">View on GitHub</a>
               </div>
             </div>
-          </article>
+          </li>
 
-          <article class="project" aria-roledescription="slide" aria-label="2 of 3">
-            <div class="project__body">
-              <h3>Phishing Email Analysis</h3>
+          <li class="wheel__item">
+            <button class="wheel__chip" type="button" aria-haspopup="dialog">Phishing Email Analysis</button>
+            <div class="wheel__more" hidden>
               <p class="project__desc">Header, link and attachment analysis of sample phishing emails, ending in a short incident report for each case.</p>
               <div class="project__meta">
                 <h4>Tools used</h4>
@@ -225,17 +230,16 @@
               <div class="project__meta">
                 <h4>Details</h4>
                 <ul class="details">
-                  <li><strong>Status:</strong> Upcoming</li>
                   <li><strong>Focus:</strong> Email security and incident reporting</li>
                 </ul>
-                <a class="link" href="https://github.com/your-username" target="_blank" rel="noopener">View on GitHub</a>
+                <a class="link" href="https://github.com/inchara-3110" target="_blank" rel="noopener">View on GitHub</a>
               </div>
             </div>
-          </article>
+          </li>
 
-          <article class="project" aria-roledescription="slide" aria-label="3 of 3">
-            <div class="project__body">
-              <h3>Network Traffic Investigation</h3>
+          <li class="wheel__item">
+            <button class="wheel__chip" type="button" aria-haspopup="dialog">Network Traffic Investigation</button>
+            <div class="wheel__more" hidden>
               <p class="project__desc">Packet-level investigation of suspicious traffic from capture files, documenting indicators of compromise.</p>
               <div class="project__meta">
                 <h4>Tools used</h4>
@@ -244,69 +248,81 @@
               <div class="project__meta">
                 <h4>Details</h4>
                 <ul class="details">
-                  <li><strong>Status:</strong> Upcoming</li>
                   <li><strong>Focus:</strong> Packet analysis and indicators of compromise</li>
                 </ul>
-                <a class="link" href="https://github.com/your-username" target="_blank" rel="noopener">View on GitHub</a>
+                <a class="link" href="https://github.com/inchara-3110" target="_blank" rel="noopener">View on GitHub</a>
               </div>
             </div>
-          </article>
+          </li>
 
-        </div>
+          <li class="wheel__item">
+            <button class="wheel__chip" type="button" aria-haspopup="dialog">Attack Investigation and Reconstruction</button>
+            <div class="wheel__more" hidden>
+              <p class="project__desc">Investigates a simulated attack by collecting Windows logs and PowerShell activity, correlating the events and reconstructing the attack timeline step by step.</p>
+              <div class="project__meta">
+                <h4>Tools used</h4>
+                <ul class="tags"><li>Python</li><li>Kali Linux</li><li>Flask</li><li>Windows PowerShell</li><li>Windows Logs</li></ul>
+              </div>
+              <div class="project__meta">
+                <h4>Details</h4>
+                <ul class="details">
+                  <li><strong>Focus:</strong> Collection and correlation of log events to reconstruct an attack timeline</li>
+                </ul>
+                <a class="link" href="https://github.com/inchara-3110" target="_blank" rel="noopener">View on GitHub</a>
+              </div>
+            </div>
+          </li>
 
-        <button class="round-btn round-btn--solid slider__arrow slider__arrow--next" id="nextProject" type="button" aria-label="Next project">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-        </button>
+        </ul>
       </div>
-
-      <div class="dots" id="projectDots" aria-hidden="true"></div>
     </section>
 
-    <!-- CERTIFICATIONS TIMELINE -->
+    <!-- CERTIFICATIONS (rectangle boxes: click one to bring it forward) -->
     <section class="section container" id="certifications" aria-labelledby="cert-title">
       <h2 id="cert-title">Certifications</h2>
-      <p class="section__lead">My learning path: from security fundamentals to SOC-ready skills.</p>
+      <p class="section__lead">My learning path: from security fundamentals to SOC-ready skills. Select a certification to see its details.</p>
 
-      <div class="roadmap" id="roadmap">
-        <div class="roadmap__line" aria-hidden="true"></div>
-        <div class="roadmap__fill" id="roadFill" aria-hidden="true"></div>
-        <span class="roadmap__pointer" id="roadPointer" aria-hidden="true"></span>
+      <!-- To add a certification: copy one whole <li> ... </li> block below and edit it.
+           data-state="done" gives a green status tag, data-state="next" gives a cream one. -->
+      <ul class="cert-grid" id="certGrid">
 
-        <!-- data-state: done | current | next
-             The moving line and ring stop at the LAST stop that is not "next".
-             When you finish a certification later, change its data-state (and its status text). -->
-        <ol class="roadmap__list">
-          <li class="stop" data-state="done">
-            <span class="stop__dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <div class="stop__card">
-              <h3>Cyber Security Fundamentals</h3>
-              <p>Completed</p>
-            </div>
-          </li>
-          <li class="stop" data-state="next">
-            <span class="stop__dot"></span>
-            <div class="stop__card">
-              <h3>CompTIA Security+</h3>
-              <p>Next level</p>
-            </div>
-          </li>
-          <li class="stop" data-state="next">
-            <span class="stop__dot"></span>
-            <div class="stop__card">
-              <h3>Microsoft SC-200</h3>
-              <p>Next level</p>
-            </div>
-          </li>
-          <li class="stop" data-state="next">
-            <span class="stop__dot"></span>
-            <div class="stop__card">
-              <h3>CompTIA CySA+</h3>
-              <p>Next level</p>
-            </div>
-          </li>
-        </ol>
-      </div>
+        <li class="cert-card" data-state="done">
+          <h3 class="cert-card__title"><button class="cert-card__btn" type="button" aria-expanded="false">Cyber Security Fundamentals</button></h3>
+          <span class="cert-card__status">Completed</span>
+          <div class="cert-card__more"><p>Foundation course covering core security concepts: the CIA triad, common threats and attacks, network basics and essential defences.</p></div>
+        </li>
+
+        <li class="cert-card" data-state="next">
+          <h3 class="cert-card__title"><button class="cert-card__btn" type="button" aria-expanded="false">CompTIA Security+</button></h3>
+          <span class="cert-card__status">Planned</span>
+          <div class="cert-card__more"><p>Entry-level, industry-recognised certification covering threats, vulnerabilities, security architecture, security operations and incident response.</p></div>
+        </li>
+
+        <li class="cert-card" data-state="next">
+          <h3 class="cert-card__title"><button class="cert-card__btn" type="button" aria-expanded="false">Microsoft SC-200</button></h3>
+          <span class="cert-card__status">Planned</span>
+          <div class="cert-card__more"><p>Security Operations Analyst certification focused on threat detection, investigation and response using Microsoft Sentinel and Microsoft Defender, with queries written in KQL.</p></div>
+        </li>
+
+        <li class="cert-card" data-state="next">
+          <h3 class="cert-card__title"><button class="cert-card__btn" type="button" aria-expanded="false">CompTIA CySA+</button></h3>
+          <span class="cert-card__status">Planned</span>
+          <div class="cert-card__more"><p>Cybersecurity Analyst certification focused on security analytics, threat detection, vulnerability management and incident response.</p></div>
+        </li>
+
+      </ul>
     </section>
+
+    <!-- PROJECT DETAILS POP-UP (opens when you click a project name) -->
+    <dialog class="project-dialog" id="projectDialog" aria-labelledby="pdTitle">
+      <div class="project-dialog__box">
+        <button class="icon-close" id="pdClose" type="button" aria-label="Close project details">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <h3 id="pdTitle"></h3>
+        <div class="project-dialog__body" id="pdBody"></div>
+      </div>
+    </dialog>
 
   </main>
 
@@ -329,7 +345,7 @@
             </a>
           </li>
           <li>
-            <a class="social social--email" href="mailto:incharak006@gmail.com">
+            <a class="social social--email" href="mailto:inchuincharap140@gmail.com">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
               <span>Email</span>
             </a>
@@ -339,6 +355,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=3" defer></script>
+  <script src="js/main.js?v=7" defer></script>
 </body>
 </html>
