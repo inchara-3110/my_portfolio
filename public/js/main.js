@@ -73,7 +73,7 @@
   '#C77D67', // Terracotta
   '#92969A', // Soft grey
   '#6F91AD', // Muted blue
-  '#B6A58A', // Warm beige
+  '#A3AA91', // sage
   '#526D82'  // Slate blue
 ];
       const C = 200;          // centre of the ring
